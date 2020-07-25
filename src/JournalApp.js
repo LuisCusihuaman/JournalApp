@@ -6,7 +6,7 @@ import { AppRouter } from "./routers/AppRouter";
 export const JournalApp = () => {
 	return (
 		<Provider store={store}>
-			<AppRouter />;
+			<AppRouter />
 		</Provider>
 	);
 };
