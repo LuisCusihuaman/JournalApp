@@ -9,6 +9,5 @@ export const loadNotes = async (uid) => {
 			...snapHijo.data(),
 		});
 	});
-	console.log(notes);
 	return notes;
 };
