@@ -1,6 +1,11 @@
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
-const { login, logout, startLogout } = require("../../actions/auth");
+const {
+	login,
+	logout,
+	startLogout,
+	startLoginEmailPassword,
+} = require("../../actions/auth");
 const { types } = require("../../types/types");
 
 const middlewares = [thunk]; // add your middlewares like `redux-thunk`
@@ -29,8 +34,9 @@ describe("Pruebas con las acciones de Auth", () => {
 		const loginAction = login(uid, displayName);
 		const logoutAction = logout();
 		expect(loginAction).toEqual({
-            type: types.login, payload: {uid,displayName}
-        })
+			type: types.login,
+			payload: { uid, displayName },
+		});
 		login();
 		expect(logoutAction).toEqual({ type: types.logout });
 	});
@@ -40,10 +46,16 @@ describe("Pruebas con las acciones de Auth", () => {
 		expect(actions[0]).toEqual({
 			type: types.logout,
 		});
-        expect(actions[1]).toEqual({type: types.notesLogoutCleaning})
+		expect(actions[1]).toEqual({ type: types.notesLogoutCleaning });
 	});
-    test('debe de iniciar el start ', () => {
-        
-    })
-    
+	test("debe de iniciar el startLoginEmailPassword ", async () => {
+		await store.dispatch(
+			startLoginEmailPassword("test@test.com", "123456")
+		);
+		const actions = store.getActions();
+		expect(actions[1]).toEqual({
+			type: types.login,
+			payload: { uid: "haPczeMhJ1gh7zgfnTDD2cNDUwv1", displayName: null },
+		});
+	});
 });
