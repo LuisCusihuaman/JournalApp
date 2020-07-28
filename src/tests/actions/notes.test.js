@@ -1,6 +1,10 @@
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
-import { startNewNote, startLoadingNotes } from "../../actions/notes";
+import {
+	startNewNote,
+	startLoadingNotes,
+	startSaveNote,
+} from "../../actions/notes";
 import { db } from "../../firebase/firebase-config";
 import { types } from "../../types/types";
 
@@ -56,5 +60,17 @@ describe("Pruebas con las actiosn de notes", () => {
 			date: expect.any(Number),
 		};
 		expect(actions[0].payload[0]).toMatchObject(expected);
+	});
+	test("startSaveNotes debe de actualizar la nota", async () => {
+		const note = {
+			id: "2s6vAD4ycd57Vwux8Gc8",
+			title: "titulo",
+			body: "body",
+		};
+		await store.dispatch(startSaveNote(note));
+		const actions = store.getActions();
+		expect(actions[0].type).toBe(types.notesUpdated);
+		const docRef = await db.doc(`/TESTING/journal/notes/${note.id}`).get();
+		expect(docRef.data().title).toBe(note.title);
 	});
 });
