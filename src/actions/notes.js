@@ -87,7 +87,7 @@ export const startUploading = (file) => {
 export const startDeleting = (id) => {
 	return async (dispatch, getState) => {
 		const { uid } = getState().auth;
-		dispatch(deleteNote(activeNote));
+		dispatch(deleteNote(id));
 		await db.doc(`${uid}/journal/notes/${id}`).delete();
 	};
 };
