@@ -10,6 +10,6 @@ export const types = {
 	notesLoad: "[Notes] Load notes",
 	notesUpdated: "[Notes] Updated note",
 	notesFileUrl: "[Notes] Updated image url",
-	notesDelege: "[Notes] Delete note",
+	notesDelete: "[Notes] Delete note",
 	notesLogoutCleaning: "[Notes] logout Cleaning",
 };
