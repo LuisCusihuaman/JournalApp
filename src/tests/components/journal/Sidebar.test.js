@@ -5,12 +5,12 @@ import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router-dom";
-import { Sidebar } from "../../components/journal/Sidebar";
-import { startLogout } from "../../actions/auth";
-import { startNewNote } from "../../actions/notes";
+import { startLogout } from "../../../actions/auth";
+import { startNewNote } from "../../../actions/notes";
+import { Sidebar } from "../../../components/journal/Sidebar";
 
-jest.mock("../../actions/auth", () => ({ startLogout: jest.fn() }));
-jest.mock("../../actions/notes", () => ({ startNewNote: jest.fn() }));
+jest.mock("../../../actions/auth", () => ({ startLogout: jest.fn() }));
+jest.mock("../../../actions/notes", () => ({ startNewNote: jest.fn() }));
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 

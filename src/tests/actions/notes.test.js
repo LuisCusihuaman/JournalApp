@@ -89,8 +89,6 @@ describe("Pruebas con las actiosn de notes", () => {
 		const docRef = await db.doc(`/TESTING/journal/notes/${note.id}`).get();
 		expect(docRef.data().title).toBe(note.title);
 	});
-	Swal.fire = jest.fn();
-	Swal.close = jest.fn();
 	test("startUploading debe de actualizar el url del entry", async () => {
 		const file = new File([], "foto.jpg");
 		await store.dispatch(startUploading(file));
