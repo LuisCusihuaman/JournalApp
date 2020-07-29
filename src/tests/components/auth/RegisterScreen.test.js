@@ -20,7 +20,6 @@ const initState = {
 };
 
 let store = mockStore(initState);
-// store.dispatch = jest.fn();
 
 const wrapper = mount(
 	<Provider store={store}>
@@ -34,7 +33,6 @@ describe("Pruebas en <RegisterScreen />", () => {
 	test("debe de mostrarse correctamente", () => {
 		expect(wrapper).toMatchSnapshot();
 	});
-
 	test("deberia lanzar un error la accion cuando el correo es incorrecto", () => {
 		const emailField = wrapper.find('input[name="email"]');
 
@@ -55,5 +53,28 @@ describe("Pruebas en <RegisterScreen />", () => {
 			type: types.uiSetError,
 			payload: "Email is not valid",
 		});
+	});
+	test("debe de mostrar la caja de alerta con el error", () => {
+		const initState = {
+			auth: {},
+			ui: {
+				loading: false,
+				msgError: "Email no es correcto",
+			},
+		};
+
+		let store = mockStore(initState);
+
+		const wrapper = mount(
+			<Provider store={store}>
+				<MemoryRouter>
+					<RegisterScreen />
+				</MemoryRouter>
+			</Provider>
+		);
+		expect(wrapper.find(".auth__alert-error").exists()).toBe(true);
+		expect(wrapper.find(".auth__alert-error").text().trim()).toBe(
+			initState.ui.msgError
+		);
 	});
 });
