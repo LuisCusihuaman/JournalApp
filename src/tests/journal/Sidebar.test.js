@@ -48,5 +48,8 @@ describe("Pruebas en <Sidebar/>", () => {
 		wrapper.find("button").prop("onClick")();
 		expect(startLogout).toHaveBeenCalled();
 	});
-	test("debe de llamar el startNewNote", () => {});
+	test("debe de llamar el startNewNote", () => {
+		wrapper.find(".journal__new-entry").prop("onClick")();
+		expect(startNewNote).toHaveBeenCalled();
+	});
 });
