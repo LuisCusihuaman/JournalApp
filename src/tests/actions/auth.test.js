@@ -23,7 +23,7 @@ const initState = {
 	},
 };
 
-let store = mockStore({ initState });
+let store = mockStore(initState);
 describe("Pruebas con las acciones de Auth", () => {
 	beforeEach(() => {
 		store = mockStore(initState);

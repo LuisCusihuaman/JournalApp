@@ -32,7 +32,7 @@ const initState = {
 	},
 };
 
-let store = mockStore({ initState });
+let store = mockStore(initState);
 
 describe("Pruebas con las actiosn de notes", () => {
 	beforeEach(() => {
