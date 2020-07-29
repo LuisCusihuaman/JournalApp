@@ -5,9 +5,9 @@ import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import "@testing-library/jest-dom";
 import { NoteScreen } from "../../../components/notes/NoteScreen";
-import { activeNote } from "../../../actions/notes";
+import { activeNote, startNewNote } from "../../../actions/notes";
 
-jest.mock("../../../actions/auth", () => ({ activeNote: jest.fn() }));
+jest.mock("../../../actions/notes", () => ({ activeNote: jest.fn() }));
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
@@ -45,5 +45,19 @@ describe("Pruebas en <NoteScreen />", () => {
 	});
 	test("debe de mostrarse correctamente", () => {
 		expect(wrapper).toMatchSnapshot();
+	});
+	test("debe de disparar el active note cuando seleciona una active note", () => {
+		wrapper.find("input[name='title']").simulate("change", {
+			target: {
+				name: "title",
+				value: "Hola denuevo",
+			},
+		});
+		expect(activeNote).toHaveBeenLastCalledWith(1234, {
+			body: "mundo",
+			date: 0,
+			id: 1234,
+			title: "Hola denuevo",
+		});
 	});
 });
